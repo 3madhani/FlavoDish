@@ -1,0 +1,40 @@
+name: flavodish
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  bloc: ^8.1.4
+  dio: ^5.7.0
+  flutter:
+    sdk: flutter
+
+  get_it: ^8.0.0
+  flutter_svg: ^2.0.10+1
+  go_router: ^14.3.0
+  google_fonts: ^6.2.1
+  hugeicons: ^0.0.7
+  percent_indicator: ^4.2.3
+  flutter_card_swiper: ^7.0.2
+
+dev_dependencies:
+  flutter_lints: ^4.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/animations/
+    - assets/images/
+    - assets/svg/
+
+  fonts:
+
+    - family: Sofia Pro
+      fonts:
+        - asset: assets/fonts/Sofia Pro Regular.ttf
