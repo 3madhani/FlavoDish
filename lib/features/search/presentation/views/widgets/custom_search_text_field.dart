@@ -1,3 +1,4 @@
+import 'package:flavodish/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 
@@ -36,7 +37,7 @@ class CustomSearchTextField extends StatelessWidget {
           },
           icon: Icon(
             HugeIcons.strokeRoundedSearch01,
-            color: Colors.white.withOpacity(0.8),
+            color: kPrimaryTextColor.withOpacity(0.8),
             size: 24,
           ),
         ),
@@ -47,7 +48,7 @@ class CustomSearchTextField extends StatelessWidget {
   OutlineInputBorder buildOutlineInputBorder() {
     return OutlineInputBorder(
       borderSide: const BorderSide(
-        color: Colors.white,
+        color: kPrimaryTextColor,
       ),
       borderRadius: BorderRadius.circular(
         12,

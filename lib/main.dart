@@ -1,9 +1,12 @@
 import 'package:flavodish/constants.dart';
-import 'package:flavodish/utils/app_router.dart';
+import 'package:flavodish/core/utils/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'core/utils/service_locator.dart';
+
 void main() {
+  setupServiceLocator();
   runApp(const FlavoDish());
 }
 

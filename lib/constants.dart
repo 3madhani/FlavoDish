@@ -13,8 +13,14 @@ const Map mealCatagoriesMap = {
   "Lunch": [
     "assets/images/lunch.png",
   ],
+  "Snacks": [
+    "assets/images/snacks.jpg",
+  ],
   "Dinner": [
     "assets/images/dinner.jpg",
+  ],
+  "TeaTime": [
+    "assets/images/teatime.jpg",
   ],
 };
 const String caloriesSvg = "assets/svg/apple-svgrepo-com.svg";
@@ -53,7 +59,44 @@ const Map progressCardMap = {
   ],
 };
 
+List<String> dishTypeList = [
+  "Biscuits and cookies",
+  "Bread",
+  "Cereals",
+  "Condiments and sauces",
+  "Desserts",
+  "Drinks",
+  "Main course",
+  "Pancake",
+  "Preps",
+  "Preserve",
+  "Salad",
+  'Sandwiches',
+  "Side dish",
+  "Soup",
+  "Starter",
+  "Sweets"
+];
 
-// const Color(0xff5fe69a),
-//                 const Color(0xffc7ee7e).withOpacity(.6),
-//                 const Color(0xff5fe69a),
+List<String> cuisineTypeList = [
+  "American",
+	"Asian",
+  "British",
+  "Caribbean",
+  "Central Europe",
+  "Chinese",
+  "French",
+  "Greek",
+  "Indian",
+  "Italian",
+  "Japanese",
+  "Korean",
+  "Kosher",
+  "Mexican",
+  "Mediterranean",
+  "Middle Eastern",
+  "Nordic",
+  "South American",
+  "South East Asian",
+  "World",
+];

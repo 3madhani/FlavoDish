@@ -1,5 +1,5 @@
 import 'package:flavodish/features/home/presentation/views/home_view.dart';
-import 'package:flavodish/features/home/presentation/views/widgets/bottom_navigation_bar.dart';
+import 'package:flavodish/features/main/presentation/views/widgets/bottom_navigation_bar.dart';
 import 'package:flavodish/features/profile/presentation/views/profile_view.dart';
 import 'package:flavodish/features/savedRecipes/presentation/views/saved_recipes_view.dart';
 import 'package:flavodish/features/search/presentation/views/search_view.dart';
@@ -13,21 +13,20 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
-
   int _selectedIndex = 0;
 
-  static const List<Widget> _pages = <Widget>[
-    HomeView(),
-    SearchView(),
-    SavedRecipesView(),
-    ProfileView(),
+  static final List<Widget> _pages = <Widget>[
+    const HomeView(),
+    const SearchView(),
+    const SavedRecipesView(),
+    const ProfileView(),
   ];
   void _onItemTapped(int index) {
-
     setState(() {
       _selectedIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,5 +1,7 @@
 import 'package:flavodish/constants.dart';
 import 'package:flavodish/features/home/presentation/views/widgets/catagories_card.dart';
+import 'package:flavodish/features/meals/presentation/views/meals_view.dart';
+import 'package:flavodish/core/utils/widgets/animated_open_container.dart';
 import 'package:flutter/material.dart';
 
 class ListViewMealCatagories extends StatelessWidget {
@@ -24,10 +26,36 @@ class ListViewMealCatagories extends StatelessWidget {
               String imagePath = mealCatagoriesMap[category][0];
 
               // Return a FoodCard for each map entry
-              return CatagoriesCard(
-                imagePath: imagePath,
-                mealCatagories: category,
-                // color: cardColor,
+              return Padding(
+                padding: const EdgeInsets.only(
+                  right: kPadding,
+                  bottom: 8,
+                  top: 8,
+                ),
+                child: Container(
+                  decoration: BoxDecoration(boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      spreadRadius: 2,
+                      blurRadius: 7,
+                      offset: const Offset(0, 3),
+                    )
+                  ]),
+                  child: AnimatedOpenContainer(
+                    borderRadius: 16,
+                    openedWidget: MealsView(
+                      mealType: category,
+                      dishType: null,
+                    ),
+                    closedWidget: Center(
+                      child: CatagoriesCard(
+                        imagePath: imagePath,
+                        mealCatagories: category,
+                        // color: cardColor,
+                      ),
+                    ),
+                  ),
+                ),
               );
             }),
       ),

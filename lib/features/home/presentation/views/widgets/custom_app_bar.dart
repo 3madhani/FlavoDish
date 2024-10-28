@@ -1,5 +1,5 @@
 import 'package:flavodish/constants.dart';
-import 'package:flavodish/utils/styles.dart';
+import 'package:flavodish/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget {

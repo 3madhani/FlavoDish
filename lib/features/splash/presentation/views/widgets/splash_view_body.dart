@@ -1,4 +1,4 @@
-import 'package:flavodish/utils/app_router.dart';
+import 'package:flavodish/core/utils/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
