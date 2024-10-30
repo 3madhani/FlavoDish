@@ -11,10 +11,12 @@ class MealTypeMealsCubit extends Cubit<MealTypeMealsState> {
   final MealsRepo mealsRepo;
 
 
-  Future<void> getMealsDependingOnMealType({required String mealType}) async {
+  Future<void> getMealsDependingOnMealType({required String mealType, String? cuisineType}) async {
     emit(MealTypeMealsLoading());
+
     var result = await mealsRepo.getMealsDependingOnMealType(
       mealType: mealType,
+      cuisineType: cuisineType,
     );
 
     result.fold((failure) {

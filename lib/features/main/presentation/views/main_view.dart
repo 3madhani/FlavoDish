@@ -1,7 +1,7 @@
 import 'package:flavodish/features/home/presentation/views/home_view.dart';
 import 'package:flavodish/features/main/presentation/views/widgets/bottom_navigation_bar.dart';
 import 'package:flavodish/features/profile/presentation/views/profile_view.dart';
-import 'package:flavodish/features/savedRecipes/presentation/views/saved_recipes_view.dart';
+import 'package:flavodish/features/meal_detail/presentation/views/favorite_view.dart';
 import 'package:flavodish/features/search/presentation/views/search_view.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +18,7 @@ class _MainViewState extends State<MainView> {
   static final List<Widget> _pages = <Widget>[
     const HomeView(),
     const SearchView(),
-    const SavedRecipesView(),
+    const FavoriteRecipeView(),
     const ProfileView(),
   ];
   void _onItemTapped(int index) {

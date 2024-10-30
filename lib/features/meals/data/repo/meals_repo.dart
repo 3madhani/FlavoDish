@@ -7,12 +7,15 @@ abstract class MealsRepo {
 
   Future<Either<Failure, MealModel>> getMealsDependingOnDishType({
     required String dishType,
+    required String? cuisineType,
   });
   Future<Either<Failure, MealModel>> getMealsDependingOnDishTypeAndCuisineType({
-    required String dishType,
+    required String? dishType,
     required String cuisineType,
+    required String ?mealType,
   });
   Future<Either<Failure, MealModel>> getMealsDependingOnMealType({
     required String mealType,
+    required String? cuisineType,
   });
 }

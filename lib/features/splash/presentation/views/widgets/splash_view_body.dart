@@ -22,12 +22,15 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
   void navigateToHome() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(const Duration(seconds: 3), () {
-        if (mounted) {
-          // Check if the widget is still mounted before navigation
-          GoRouter.of(context).go(AppRouter.homeRoute);
-        }
-      });
+      Future.delayed(
+        const Duration(seconds: 3),
+        () {
+          if (mounted) {
+            // Check if the widget is still mounted before navigation
+            GoRouter.of(context).go(AppRouter.mainRoute);
+          }
+        },
+      );
     });
   }
 
@@ -37,7 +40,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(
-          'assets/animations/Flavo (1).gif',
+          "assets/animations/Flavo (1).gif",
         ),
       ],
     );

@@ -24,9 +24,9 @@ class AnimatedIconButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: AnimatedContainer(
-        curve: Curves.linearToEaseOut,
+        curve: Curves.easeInOut,
         width: isSelected ? 150 : 50,
-        duration: const Duration(milliseconds: 400),
+        duration: const Duration(milliseconds: 600),
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
           border: Border.all(

@@ -14,9 +14,17 @@ class MealsRepoImpl implements MealsRepo {
 
   @override
   Future<Either<Failure, MealModel>> getMealsDependingOnDishType(
-      {required String dishType}) async {
+      {required String dishType, String? cuisineType}) async {
     try {
-      var data = await apiService.get(endPoint: '&dishType=$dishType');
+      String endPoint;
+      // Make sure to pass the correct mealType
+      if (cuisineType != null) {
+        endPoint = "&dishType=$dishType&cuisineType=$cuisineType";
+      } else {
+        endPoint = "&dishType=$dishType";
+      }
+      var data = await apiService.get(endPoint: endPoint);
+
       MealModel mealModel = MealModel.fromJson(data);
 
       return right(mealModel);
@@ -36,12 +44,18 @@ class MealsRepoImpl implements MealsRepo {
 
   @override
   Future<Either<Failure, MealModel>> getMealsDependingOnMealType(
-      {required String mealType}) async {
+      {required String mealType, String? cuisineType}) async {
     try {
+      String endPoint;
       // Make sure to pass the correct mealType
-      var data = await apiService.get(endPoint: '&mealType=$mealType');
+      if (cuisineType != null) {
+        endPoint = "&mealType=$mealType&cuisineType=$cuisineType";
+      } else {
+        endPoint = "&mealType=$mealType";
+      }
+      var data = await apiService.get(endPoint: endPoint);
+
       MealModel mealModel = MealModel.fromJson(data);
-      
 
       return right(mealModel);
     } catch (e) {
@@ -59,12 +73,17 @@ class MealsRepoImpl implements MealsRepo {
   }
 
   @override
-  Future<Either<Failure, MealModel>>
-      getMealsDependingOnDishTypeAndCuisineType(
-          {required String dishType, required String cuisineType}) async {
+  Future<Either<Failure, MealModel>> getMealsDependingOnDishTypeAndCuisineType(
+      {String? dishType, required String cuisineType, String? mealType}) async {
     try {
-      var data = await apiService.get(
-          endPoint: '&dishType=$dishType&cuisineType=$cuisineType');
+      String endPoint;
+      if (mealType != null) {
+        endPoint = "&dishType=$dishType";
+      } else {
+        endPoint = "&mealType=$mealType";
+      }
+      var data =
+          await apiService.get(endPoint: '&cuisineType=$cuisineType$endPoint');
       MealModel mealModel = MealModel.fromJson(data);
 
       return right(mealModel);

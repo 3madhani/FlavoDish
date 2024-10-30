@@ -18,6 +18,8 @@ class ListViewMealCatagories extends StatelessWidget {
       child: SizedBox(
         height: MediaQuery.of(context).size.height * 0.21,
         child: ListView.builder(
+            clipBehavior: Clip.none,
+            physics: const BouncingScrollPhysics(),
             itemCount: mealCatagoriesMap.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
@@ -35,7 +37,7 @@ class ListViewMealCatagories extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
+                      color: Colors.blueAccent.withOpacity(0.2),
                       spreadRadius: 2,
                       blurRadius: 7,
                       offset: const Offset(0, 3),
