@@ -143,6 +143,7 @@ class TotalDaily {
         foldfe: json['FOLDFE'] == null
             ? null
             : Foldfe.fromJson(json['FOLDFE'] as Map<String, dynamic>),
+            
         vitb12: json['VITB12'] == null
             ? null
             : Vitb12.fromJson(json['VITB12'] as Map<String, dynamic>),

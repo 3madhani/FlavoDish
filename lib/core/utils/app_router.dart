@@ -1,19 +1,10 @@
-import 'package:flavodish/core/utils/service_locator.dart';
 import 'package:flavodish/features/home/presentation/views/home_view.dart';
 import 'package:flavodish/features/main/presentation/views/main_view.dart';
-import 'package:flavodish/features/meals/data/repo/meals_repo_impl.dart';
-import 'package:flavodish/features/meals/presentation/manager/dish_cuisine_type-meals_cubit/dish_cuisine_type_meals_cubit.dart';
-import 'package:flavodish/features/meals/presentation/manager/dish_type_meals_cubit/dish_type_meals_cubit.dart';
-import 'package:flavodish/features/meals/presentation/manager/meal_type_meals_cubit/meal_type_meals_cubit.dart';
-import 'package:flavodish/features/meals/presentation/views/meals_view.dart';
 import 'package:flavodish/features/profile/presentation/views/profile_view.dart';
-import 'package:flavodish/features/savedRecipes/presentation/views/saved_recipes_view.dart';
-import 'package:flavodish/features/search/data/repo/search_repo_impl.dart';
-import 'package:flavodish/features/search/presentation/manager/searched_meals_cubit/searched_meals_cubit.dart';
+import 'package:flavodish/features/meal_detail/presentation/views/favorite_view.dart';
 import 'package:flavodish/features/search/presentation/views/search_view.dart';
 import 'package:flavodish/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 abstract class AppRouter {
@@ -27,7 +18,7 @@ abstract class AppRouter {
   static const String mealRoute = '/mealView';
 
   static final router = GoRouter(
-    initialLocation: mainRoute,
+    initialLocation: splashRoute,
     routes: <RouteBase>[
       GoRoute(
         path: splashRoute,
@@ -59,64 +50,23 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: searchRoute,
-        builder: (context, state) => BlocProvider(
-          create: (context) => SearchedMealsCubit(
-            getIt.get<SearchRepoImpl>(),
-          ),
-          child: const SearchView(),
-        ),
+        builder: (context, state) => const SearchView(),
       ),
       GoRoute(
         path: savedRecipesRoute,
-        builder: (context, state) => const SavedRecipesView(),
+        builder: (context, state) => const FavoriteRecipeView(),
       ),
       GoRoute(
         path: profileRoute,
         builder: (context, state) => const ProfileView(),
       ),
-      GoRoute(
-        path: searchRoute,
-        builder: (context, state) => MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (context) => MealTypeMealsCubit(
-                getIt.get<MealsRepoImpl>(),
-              ),
-            ),
-            BlocProvider(
-              create: (context) => DishTypeMealsCubit(
-                getIt.get<MealsRepoImpl>(),
-              ),
-            ),
-            BlocProvider(
-              create: (context) => DishCuisineTypeMealsCubit(
-                getIt.get<MealsRepoImpl>(),
-              ),
-            ),
-          ],
-          child: const MealsView(),
-        ),
-      ),
-      // GoRoute(
-      //   path: bookDetailsRoute,
-      //   builder: (context, state) => BlocProvider(
-      //     create: (context) => SimilarBooksCubit(
-      //       getIt.get<HomeRepoImpl>(),
-      //     ),
-      //     child: BookDetailsView(
-      //       bookModel: state.extra as BookModel,
-      //     ),
-      //   ),
-      // ),
-      // GoRoute(
-      //   path: searchRoute,
-      //   builder: (context, state) => BlocProvider(
-      //     create: (context) => SearchedBooksCubit(
-      //       getIt.get<SearchRepoImpl>(),
-      //     ),
-      //     child: const SearchView(),
-      //   ),
-      // ),
     ],
+    errorBuilder: (context, state) {
+      return Scaffold(
+        body: Center(
+          child: Text('Error: ${state.error}'),
+        ),
+      );
+    },
   );
 }

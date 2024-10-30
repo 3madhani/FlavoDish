@@ -9,55 +9,61 @@ class CardOfMealsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-                  padding: const EdgeInsets.all(
-                    16,
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            overflow: TextOverflow.ellipsis,
+            recipe.label ?? "No title available", // Handle null title
+            style: Styles.textStyle18.copyWith(
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            overflow: TextOverflow.ellipsis,
+            recipe.dishType != null && recipe.dishType!.isNotEmpty
+                ? recipe.dishType![0]
+                : "No dish type available",
+            style: Styles.textStyle16.copyWith(
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            overflow: TextOverflow.ellipsis,
+            recipe.cuisineType != null && recipe.cuisineType!.isNotEmpty
+                ? recipe.cuisineType![0]
+                : "No cuisine type available", // Handle null or empty cuisine type
+            style: Styles.textStyle16.copyWith(
+              color: Colors.black,
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                fit: FlexFit.loose,
+                child: Text(
+                  overflow: TextOverflow.ellipsis,
+                  recipe.source ?? "No source available", // Handle null source
+                  style: Styles.textStyle16.copyWith(
+                    color: Colors.black,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        overflow: TextOverflow.ellipsis,
-                        recipe.label!,
-                        style: Styles.textStyle16.copyWith(
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        overflow: TextOverflow.ellipsis,
-                        recipe.dishType![0],
-                        style: Styles.textStyle14.copyWith(
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        overflow: TextOverflow.ellipsis,
-                        recipe.cuisineType![0],
-                        style: Styles.textStyle14.copyWith(
-                          color: Colors.black,
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            overflow: TextOverflow.ellipsis,
-                            recipe.source!,
-                            style: Styles.textStyle14.copyWith(
-                              color: Colors.black,
-                            ),
-                          ),
-                          Text(
-                            overflow: TextOverflow.ellipsis,
-                            "${recipe.totalTime!} min",
-                            style: Styles.textStyle14.copyWith(
-                              color: Colors.black,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
+                ),
+              ),
+              Text(
+                overflow: TextOverflow.ellipsis,
+                "${recipe.totalTime ?? 0} min", // Handle null total time
+                style: Styles.textStyle16.copyWith(
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

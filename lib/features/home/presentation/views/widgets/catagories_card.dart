@@ -18,25 +18,31 @@ class CatagoriesCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.vertical(
-              top: Radius.circular(10),
-            ),
-            child: AspectRatio(
-              aspectRatio: 1,
-              child: Image.asset(
-                imagePath,
-                fit: BoxFit.fill,
+          Expanded(
+            flex: 4,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(10),
+              ),
+              child: AspectRatio(
+                aspectRatio: 4 / 3,
+                child: Image.asset(
+                  imagePath,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
-          SizedBox(
-            height: MediaQuery.sizeOf(context).height * 0.01,
-          ),
-          Text(
-            mealCatagories,
-            style: Styles.textStyle16.copyWith(
-              fontWeight: FontWeight.bold,
+          Expanded(
+            flex: 2,
+            child: Center(
+              child: Text(
+                textAlign: TextAlign.center,
+                mealCatagories,
+                style: Styles.textStyle18.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
           SizedBox(

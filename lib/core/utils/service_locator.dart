@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flavodish/core/api/api_service.dart';
 import 'package:flavodish/features/meals/data/repo/meals_repo_impl.dart';
+import 'package:flavodish/features/meal_detail/data/repo/favorite_repo_impl.dart';
 import 'package:flavodish/features/search/data/repo/search_repo_impl.dart';
 import 'package:get_it/get_it.dart';
 
@@ -22,4 +23,10 @@ void setupServiceLocator() {
       getIt.get<ApiService>(),
     ),
   );
+
+  getIt.registerSingleton<FavoritesRepositoryImpl>(
+    FavoritesRepositoryImpl(
+    ),
+  );
+
 }

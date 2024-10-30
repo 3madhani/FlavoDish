@@ -5,34 +5,50 @@ import 'package:flutter/material.dart';
 
 import 'dish_type.dart';
 
-class CategorySectionList extends StatelessWidget {
-  const CategorySectionList({super.key});
+class DishTypeList extends StatelessWidget {
+  const DishTypeList({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      physics: const NeverScrollableScrollPhysics(),
+      scrollDirection: Axis.horizontal,
+      // physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       padding: const EdgeInsets.only(
+        top: kPadding,
         left: kPadding,
         right: kPadding,
+        bottom: kPadding,
       ),
       itemBuilder: (context, index) {
-        return AnimatedOpenContainer(
-            borderRadius: 100,
-            closedWidget: DishType(
-              dishType: dishTypeList[index],
-              imageUrl: "assets/images/dinner.jpg",
-            ),
-            openedWidget:  MealsView(
-              mealType: dishTypeList[index],
-              dishType: dishTypeList[index],
-            ));
+        return Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.blueAccent.withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 7,
+                offset: const Offset(0, 3),
+              )
+            ],
+          ),
+          child: AnimatedOpenContainer(
+              borderRadius: 200,
+              closedWidget: DishType(
+                dishType: dishTypeList[index],
+                imageUrl: "assets/images/dinner.jpg",
+              ),
+              openedWidget: MealsView(
+                mealType: dishTypeList[index],
+                dishType: dishTypeList[index],
+              )),
+        );
       },
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 12,
+        crossAxisCount: 2,
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 20,
       ),
       itemCount: dishTypeList.length,
     );

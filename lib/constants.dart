@@ -13,14 +13,14 @@ const Map mealCatagoriesMap = {
   "Lunch": [
     "assets/images/lunch.png",
   ],
-  "Snacks": [
-    "assets/images/snacks.jpg",
+  "Snack": [
+    "assets/images/snack.jpg",
   ],
   "Dinner": [
     "assets/images/dinner.jpg",
   ],
   "TeaTime": [
-    "assets/images/teatime.jpg",
+    "assets/images/Teatime.jpg",
   ],
 };
 const String caloriesSvg = "assets/svg/apple-svgrepo-com.svg";
@@ -75,12 +75,11 @@ List<String> dishTypeList = [
   "Side dish",
   "Soup",
   "Starter",
-  "Sweets"
 ];
 
 List<String> cuisineTypeList = [
   "American",
-	"Asian",
+  "Asian",
   "British",
   "Caribbean",
   "Central Europe",
