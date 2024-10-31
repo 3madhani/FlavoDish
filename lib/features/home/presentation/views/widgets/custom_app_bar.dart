@@ -37,7 +37,7 @@ class CustomAppBar extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      " Arnob",
+                      " Emad",
                       style: Styles.textStyle16.copyWith(
                         fontWeight: FontWeight.w900,
                         color: kPrimaryTextColor,

@@ -17,6 +17,7 @@ class ListOfCuisines extends StatefulWidget {
 class _ListOfCuisinesState extends State<ListOfCuisines> {
   int _selectedIndex = -1; // Initial index to underline the first item
   String? _cuisineType;
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -37,40 +38,43 @@ class _ListOfCuisinesState extends State<ListOfCuisines> {
   }
 
   @override
-  
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.sizeOf(context).height * 0.05,
-      child: ListView.builder(
-          itemCount: cuisineTypeList.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 8.0,
-                vertical: 6,
-              ),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: _selectedIndex == index
-                      ? kPrimaryTextColor
-                      : const Color.fromARGB(255, 196, 217, 242),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 5.0),
+      child: SizedBox(
+        height: MediaQuery.sizeOf(context).height * 0.05, // Updated here
+        child: ListView.builder(
+            itemCount: cuisineTypeList.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8.0,
+                  vertical: 6,
                 ),
-                onPressed: () {
-                  _onItemTapped(index);
-                },
-                child: Text(
-                  overflow: TextOverflow.clip,
-                  cuisineTypeList[index],
-                  style: Styles.textStyle18.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color:
-                        _selectedIndex == index ? Colors.white : Colors.black54,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: _selectedIndex == index
+                        ? kPrimaryTextColor
+                        : const Color.fromARGB(255, 196, 217, 242),
+                  ),
+                  onPressed: () {
+                    _onItemTapped(index);
+                  },
+                  child: Text(
+                    overflow: TextOverflow.ellipsis,
+                    cuisineTypeList[index],
+                    style: Styles.textStyle18.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: _selectedIndex == index
+                          ? Colors.white
+                          : Colors.black54,
+                    ),
                   ),
                 ),
-              ),
-            );
-          }),
+              );
+            }),
+      ),
     );
   }
 }

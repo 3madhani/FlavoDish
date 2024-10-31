@@ -28,21 +28,29 @@ abstract class AppRouter {
         path: mainRoute,
         pageBuilder: (context, state) {
           return CustomTransitionPage(
-              transitionDuration: const Duration(milliseconds: 1500),
-              child: const MainView(),
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                // Define the zoom transition
-                return ScaleTransition(
-                  scale: animation.drive(
-                    CurveTween(
-                      curve: Curves.easeInOut,
-                    ),
+            transitionDuration: const Duration(milliseconds: 1500),
+            child: const MainView(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              // Define the fade-through transition
+              return FadeTransition(
+                opacity: animation.drive(
+                  CurveTween(curve: Curves.easeInOut),
+                ),
+                child: SlideTransition(
+                  position: animation.drive(
+                    Tween<Offset>(
+                      begin:
+                          const Offset(0.1, 0), // Slight slide from the right
+                      end: Offset.zero,
+                    ).chain(CurveTween(curve: Curves.easeInOut)),
                   ),
                   child: child,
-                );
-              });
-        }, // Main view with bottom navigation
+                ),
+              );
+            },
+          );
+        },
       ),
       GoRoute(
         path: homeRoute,

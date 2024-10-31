@@ -13,6 +13,8 @@ class MealDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height:
+          MediaQuery.sizeOf(context).height * 0.4, // Adjust height as needed
       decoration: BoxDecoration(
         color: kScaffoldColor,
         borderRadius: const BorderRadius.only(

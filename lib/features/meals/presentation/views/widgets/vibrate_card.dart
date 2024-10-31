@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flavodish/constants.dart';
 import 'package:flavodish/core/utils/widgets/animated_open_container.dart';
-import 'package:flavodish/features/meal_detail/presentation/views/meal_details_view.dart';
+import 'package:flavodish/features/meal_detail/presentation/views/details_view.dart';
 
 import 'card_of_meals_body.dart';
 
@@ -36,7 +36,7 @@ class _VibrationCardState extends State<VibrationCard>
     _animation = Tween<double>(begin: -5, end: 5).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: Curves.easeInOut,
+        curve: Curves.easeIn,
       ),
     );
   }
@@ -59,7 +59,7 @@ class _VibrationCardState extends State<VibrationCard>
             offset: Offset(_animation.value, 0), // Left-right movement
             child: Container(
               width: MediaQuery.sizeOf(context).width * 0.5,
-              height: MediaQuery.sizeOf(context).height * 0.16,
+              height: MediaQuery.sizeOf(context).height * 0.17,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(
                   Radius.circular(24),
@@ -71,7 +71,6 @@ class _VibrationCardState extends State<VibrationCard>
                     spreadRadius: 3,
                     blurRadius: 7,
                     offset: const Offset(0, 5),
-                    
                   )
                 ],
               ),

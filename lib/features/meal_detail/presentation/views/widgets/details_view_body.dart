@@ -12,6 +12,8 @@ class DetailsViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.sizeOf(context); // Use MediaQuery once
+
     return Stack(
       children: [
         MealImage(mealImage: recipe.image!),
@@ -26,11 +28,11 @@ class DetailsViewBody extends StatelessWidget {
           ],
         ),
         Positioned(
-          top: MediaQuery.of(context).size.height * 0.24,
-          left: MediaQuery.of(context).size.width * 0.05,
-          child: FavoriteIcon(
-            recipe: recipe,
-          ),
+          top: screenSize.height *
+              0.3, // Adjust top position based on screen height
+          left: screenSize.width *
+              0.05, // Adjust left position based on screen width
+          child: FavoriteIcon(recipe: recipe),
         ),
       ],
     );
