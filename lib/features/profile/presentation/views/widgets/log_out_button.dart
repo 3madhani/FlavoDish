@@ -1,23 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flavodish/core/utils/app_router.dart';
 import 'package:flavodish/core/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 class LogOutButton extends StatelessWidget {
   const LogOutButton({super.key});
 
   Future<void> _signOut(BuildContext context) async {
-    // Show loading dialog
-    // showDialog(
-    //   context: context,
-    //   barrierDismissible: false,
-    //   builder: (context) => const Center(
-    //     child: CircularProgressIndicator(),
-    //   ),
-    // );
-
     try {
       await FirebaseAuth.instance.signOut();
+      GoRouter.of(context).go(AppRouter.authRoute);
       // Optionally navigate to the login page or show a success message
     } on FirebaseAuthException catch (e) {
       // Handle specific Firebase authentication errors
@@ -30,7 +24,7 @@ class LogOutButton extends StatelessWidget {
     } finally {
       // Close the loading dialog
 
-      Navigator.of(context).pop(); // Closes the loading dialog
+      GoRouter.of(context).go(AppRouter.authRoute); // Closes the loading dialog
     }
   }
 

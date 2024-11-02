@@ -14,7 +14,7 @@ import 'core/utils/service_locator.dart';
 import 'features/profile/presentation/manager/fetch_user_data_cubit/fetch_user_data_cubit.dart';
 import 'firebase_options.dart';
 
-bool? isLogin;
+bool isLogin = false; // Change this to a non-nullable type
 
 void main() async {
   // Ensure Flutter is initialized
@@ -25,12 +25,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  var user = FirebaseAuth.instance.currentUser;
-  if (user == null) {
-    isLogin = false;
-  } else {
-    isLogin = true;
-  }
+  // Check if the user is already logged in
+  isLogin = FirebaseAuth.instance.currentUser != null;
 
   // Initialize Hive
   await Hive.initFlutter();
@@ -42,6 +38,7 @@ void main() async {
   runApp(const FlavoDish());
 }
 
+
 class FlavoDish extends StatelessWidget {
   const FlavoDish({super.key});
 
@@ -49,25 +46,18 @@ class FlavoDish extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => LoginCubit(),
-        ),
-        BlocProvider(
-          create: (context) => SignUpCubit(),
-        ),
+        BlocProvider(create: (context) => LoginCubit()),
+        BlocProvider(create: (context) => SignUpCubit()),
         BlocProvider(
           create: (context) => FetchUserDataCubit(
-              FirebaseFirestore.instance, FirebaseAuth.instance)
-            ..getUserData(FirebaseAuth.instance.currentUser!.uid),
-        ),
-        BlocProvider(
-          create: (context) => ForgotPasswordCubit(
+            FirebaseFirestore.instance,
             FirebaseAuth.instance,
-          ),
+          )..getUserData(FirebaseAuth.instance.currentUser?.uid ?? ''),
         ),
+        BlocProvider(create: (context) => ForgotPasswordCubit(FirebaseAuth.instance)),
       ],
       child: MaterialApp.router(
-        routerConfig: AppRouter(isLogin: isLogin!).router,
+        routerConfig: AppRouter(isLogin: isLogin).router,
         debugShowCheckedModeBanner: false,
         theme: ThemeData.light().copyWith(
           scaffoldBackgroundColor: kScaffoldColor,

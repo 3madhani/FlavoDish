@@ -179,7 +179,6 @@ class _AuthViewBodyState extends State<AuthViewBody>
                       ),
                       dialogType: DialogType.error,
                     ).show();
-
                     setState(() {
                       isLoading = false;
                     });
@@ -209,9 +208,7 @@ class _AuthViewBodyState extends State<AuthViewBody>
                     setState(() {
                       isLoading = true;
                     });
-                  }
-                  if (state is SignUpEmailVerificationSent) {
-                    // Show a dialog informing the user that a verification email has been sent
+                  } else if (state is SignUpEmailVerificationSent) {
                     AwesomeDialog(
                       context: context,
                       body: const Text(
@@ -221,16 +218,9 @@ class _AuthViewBodyState extends State<AuthViewBody>
                       ),
                       dialogType: DialogType.info,
                     ).show();
-                    setState(() {
-                      isLoading = false;
-                    });
-                    // Optionally navigate to a verification page if you have one
-                    // Navigator.pushNamed(context, '/verification');
                   } else if (state is SignUpSuccess) {
+                    // Automatically navigate to the main route after email verification
                     GoRouter.of(context).go(AppRouter.mainRoute);
-                    setState(() {
-                      isLoading = false;
-                    });
                   } else if (state is SignUpFailure) {
                     AwesomeDialog(
                       padding: const EdgeInsets.all(10),
@@ -242,6 +232,12 @@ class _AuthViewBodyState extends State<AuthViewBody>
                       ),
                       dialogType: DialogType.error,
                     ).show();
+                  }
+
+                  // Always hide the loading indicator at the end
+                  if (state is SignUpLoading ||
+                      state is SignUpSuccess ||
+                      state is SignUpFailure) {
                     setState(() {
                       isLoading = false;
                     });
@@ -254,7 +250,6 @@ class _AuthViewBodyState extends State<AuthViewBody>
                     if (!isSignUp) {
                       updateView();
                     } else {
-                      // Check if password and confirm password match
                       if (signUpFormKey.currentState!.validate() &&
                           password == confirmPassword) {
                         BlocProvider.of<SignUpCubit>(context).registerUser(
