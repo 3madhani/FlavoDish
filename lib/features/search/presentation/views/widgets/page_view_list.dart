@@ -1,6 +1,6 @@
 import 'package:flavodish/core/utils/widgets/animated_open_container.dart';
 import 'package:flavodish/data/models/meal_model/meal_model.dart';
-import 'package:flavodish/features/meal_detail/presentation/views/meal_details_view.dart';
+import 'package:flavodish/features/meal_detail/presentation/views/details_view.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 

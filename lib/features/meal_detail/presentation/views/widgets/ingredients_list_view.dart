@@ -19,17 +19,22 @@ class IngredientsListView extends StatelessWidget {
       child: ListView.builder(
         itemCount: ingredient.length,
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.only(
+          left: 8,
+          right: 8,
+          top: 15,
+        ),
         itemBuilder: (context, index) {
           final currentIngredient = ingredient[index];
-
           return Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  width: MediaQuery.sizeOf(context).width * 0.24,
                   padding: const EdgeInsets.all(6),
+                  width: MediaQuery.sizeOf(context).width * 0.2,
+                  height: MediaQuery.sizeOf(context).width * 0.2,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
@@ -39,31 +44,28 @@ class IngredientsListView extends StatelessWidget {
                   ),
                   child: ClipOval(
                     child: CachedNetworkImage(
-                      width: MediaQuery.sizeOf(context).width * 0.2,
-                      height: MediaQuery.sizeOf(context).width * 0.2,
-
-                      imageUrl: currentIngredient.image ??
-                          '', // Using null-aware operator
+                      imageUrl: currentIngredient.image ?? '',
                       errorWidget: (context, url, error) => const Icon(
                         Icons.error,
                         size: 60,
                       ),
                       placeholder: (context, url) =>
-                          const CircularProgressIndicator(), // Optional loading indicator
-                      fit: BoxFit.cover, // Ensure the image covers the circle
+                          const CircularProgressIndicator(),
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
+                const SizedBox(height: 5),
                 SizedBox(
-                  width: MediaQuery.sizeOf(context).width * 0.2,
+                  width: MediaQuery.sizeOf(context).width * 0.18,
                   child: Text(
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
-                    currentIngredient.text ??
-                        "No ingredient text available", // Fallback text
+                    currentIngredient.text ?? "No ingredient text available",
                     style: Styles.textStyle16.copyWith(
                       height: 1.2,
+                      fontSize: MediaQuery.sizeOf(context).width * 0.033,
                       fontWeight: FontWeight.normal,
                     ),
                   ),

@@ -59,6 +59,12 @@ const Map progressCardMap = {
   ],
 };
 
+const Color logInBg = Color(0xFF00C470);
+const Color signUpBg = Color(0xFF000A54);
+
+const double defaultPadding = 16.0;
+const Duration defaultDuration = Duration(milliseconds: 300);
+
 List<String> dishTypeList = [
   "Biscuits and cookies",
   "Bread",

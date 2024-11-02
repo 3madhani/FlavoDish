@@ -21,15 +21,15 @@ class MealDishAndCuisine extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // Column for the icon and time
-        const Column(
+        Column(
           mainAxisSize: MainAxisSize.min, // Use min size to avoid stretching
           children: [
-            Icon(
+            const Icon(
               size: 40,
               HugeIcons.strokeRoundedClock05, // Adjust as necessary
             ),
             Text(
-              "${40} minutes",
+              "$minutes minutes",
               style: Styles.textStyle14,
             ),
           ],

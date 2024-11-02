@@ -37,7 +37,7 @@ class DishTypeList extends StatelessWidget {
               borderRadius: 200,
               closedWidget: DishType(
                 dishType: dishTypeList[index],
-                imageUrl: "assets/images/dinner.jpg",
+                imageUrl: "assets/images/m8jv_cqpj_201128.jpg",
               ),
               openedWidget: MealsView(
                 mealType: dishTypeList[index],
