@@ -1,41 +1,50 @@
 import 'dart:async';
+import 'dart:convert'; // For JSON encoding and decoding
 import 'package:flavodish/data/models/meal_model/recipe.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 import 'favorite_repo.dart';
 
 class FavoritesRepositoryImpl implements FavoritesRepository {
-  final List<Recipe> _favorites = []; // Local storage for favorites
+  final Box<String> _favoritesBox = Hive.box<String>('favorites'); // Opened Hive box
+
   final StreamController<List<Recipe>> _favoritesController =
       StreamController<List<Recipe>>.broadcast();
 
   FavoritesRepositoryImpl() {
-    // Initially populate the stream with current favorites
-    _favoritesController.add(List.from(_favorites));
+    // Load existing favorites from Hive
+    _favoritesController.add(_getFavoritesFromHive());
+  }
+
+  List<Recipe> _getFavoritesFromHive() {
+    return _favoritesBox.values
+        .map((jsonString) => Recipe.fromJson(json.decode(jsonString)))
+        .toList();
   }
 
   @override
   Stream<List<Recipe>> get favoritesStream => _favoritesController.stream;
 
   @override
-Future<void> addFavorite(Recipe recipe) async {
-  if (!_favorites.any((fav) => fav.uri == recipe.uri)) {
-    _favorites.add(recipe);
-    _favoritesController.add(List.from(_favorites)); // Emit the updated list
+  Future<void> addFavorite(Recipe recipe) async {
+    if (!_favoritesBox.containsKey(recipe.uri)) {
+      await _favoritesBox.put(recipe.uri!, json.encode(recipe.toJson())); // Save to Hive
+      _favoritesController.add(_getFavoritesFromHive()); // Emit updated list
+    }
   }
-}
 
-@override
-Future<void> removeFavorite(String uri) async {
-  _favorites.removeWhere((recipe) => recipe.uri == uri);
-  _favoritesController.add(List.from(_favorites)); // Emit the updated list
-}
-
+  @override
+  Future<void> removeFavorite(String uri) async {
+    await _favoritesBox.delete(uri);
+    _favoritesController.add(_getFavoritesFromHive()); // Emit updated list
+  }
 
   @override
   Future<List<Recipe>> getFavorites() async {
-    return List.from(_favorites); // Return current favorites as a new list
+    return _getFavoritesFromHive(); // Return Hive-stored favorites
   }
 
   void dispose() {
-    _favoritesController.close(); // Close the stream controller
+    _favoritesController.close();
   }
 }

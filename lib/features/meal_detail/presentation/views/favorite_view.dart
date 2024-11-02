@@ -15,7 +15,9 @@ class FavoriteRecipeView extends StatelessWidget {
     var appBar = AppBar(
       titleSpacing: 2,
       shadowColor: Colors.blueAccent.withOpacity(0.1),
-      title: const AnimatedText(),
+      title: const AnimatedText(
+        text: "Favorite Recipes",
+      ),
       centerTitle: true,
     );
 

@@ -1,4 +1,3 @@
-import 'package:flavodish/constants.dart';
 import 'package:flavodish/core/utils/styles.dart';
 import 'package:flavodish/data/models/meal_model/recipe.dart';
 import 'package:flutter/material.dart';

@@ -3,7 +3,8 @@ import 'package:flavodish/constants.dart';
 import 'package:flavodish/core/utils/styles.dart';
 
 class AnimatedText extends StatefulWidget {
-  const AnimatedText({super.key});
+  const AnimatedText({super.key, required this.text});
+  final String text;
 
   @override
   State<StatefulWidget> createState() => _AnimatedTextState();
@@ -13,7 +14,6 @@ class _AnimatedTextState extends State<AnimatedText>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late List<Animation<double>> _animations;
-  final String text = "Favorite Recipes";
 
   @override
   void initState() {
@@ -27,12 +27,12 @@ class _AnimatedTextState extends State<AnimatedText>
     );
 
     // Initialize animations for each character
-    _animations = List.generate(text.length, (index) {
+    _animations = List.generate(widget.text.length, (index) {
       return Tween<double>(begin: 0.0, end: 1.0).animate(
         CurvedAnimation(
           parent: _controller,
           curve: Interval(
-            index / text.length,
+            index / widget.text.length,
             1.0,
             curve: Curves.easeInOutCubicEmphasized,
           ),
@@ -54,11 +54,11 @@ class _AnimatedTextState extends State<AnimatedText>
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(text.length, (index) {
+      children: List.generate(widget.text.length, (index) {
         return FadeTransition(
           opacity: _animations[index],
           child: Text(
-            text[index],
+            widget.text[index],
             style: Styles.textStyle20.copyWith(
               fontWeight: FontWeight.bold,
               color: kPrimaryTextColor,
