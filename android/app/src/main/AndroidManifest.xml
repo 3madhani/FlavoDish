@@ -5,7 +5,7 @@ package="com.example.app">
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:label="flavodish"
+        android:label="FLAFODISH"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

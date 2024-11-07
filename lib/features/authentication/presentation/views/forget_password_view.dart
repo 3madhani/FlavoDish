@@ -1,9 +1,12 @@
 import 'package:flavodish/constants.dart';
+import 'package:flavodish/core/utils/app_router.dart';
 import 'package:flavodish/core/utils/styles.dart';
 import 'package:flavodish/features/authentication/manager/forget_password_cubit/forget_password_cubit.dart';
 import 'package:flavodish/features/authentication/manager/forget_password_cubit/forget_password_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import 'widgets/forget_password_form.dart';
 import 'widgets/forget_password_listener.dart';
@@ -17,6 +20,16 @@ class ForgetPasswordView extends StatelessWidget {
       backgroundColor: logInBg,
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
+        leading: InkWell(
+          onTap: () => GoRouter.of(context).go(
+            AppRouter.authRoute,
+          ),
+          child: const Icon(
+            HugeIcons.strokeRoundedArrowTurnBackward,
+            color: Colors.white,
+            size: 35,
+          ),
+        ),
         backgroundColor: logInBg,
         elevation: 3,
         title: Text(
