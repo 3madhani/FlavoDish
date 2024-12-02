@@ -71,8 +71,7 @@ class DishType extends StatelessWidget {
                 fontWeight: FontWeight.w900,
                 letterSpacing: 1.5,
                 wordSpacing: 1.2,
-
-                color: getRandomTextColor(),
+                color: Colors.white,
               ),
             ),
           ),
