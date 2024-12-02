@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flavodish/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -11,41 +12,67 @@ class DishType extends StatelessWidget {
   final String dishType;
   final String imageUrl;
 
+  LinearGradient getRandomCircularGradient() {
+    final Random random = Random();
+
+    Color getRandomColor() {
+      return Color.fromARGB(
+        255,
+        random.nextInt(256),
+        random.nextInt(256),
+        random.nextInt(256),
+      );
+    }
+
+    return LinearGradient(
+      colors: [
+        getRandomColor(),
+        getRandomColor(),
+      ],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    );
+  }
+
+  Color getRandomTextColor() {
+    final Random random = Random();
+    return Color.fromARGB(
+      255, // Opacity (255 for fully opaque)
+      random.nextInt(256), // Red
+      random.nextInt(256), // Green
+      random.nextInt(256), // Blue
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.5),
-              spreadRadius: 2,
-              blurRadius: 7,
-              offset: const Offset(0, 3),
-            )
-          ],
-        ),
-        child: CircleAvatar(
-          backgroundImage: AssetImage(
-            imageUrl,
-          ),
-          child: Center(
+    // Get screen width and height
+    final screenSize = MediaQuery.sizeOf(context);
+
+    return Container(
+      width: screenSize.width * 0.25, // Adjust width based on screen size
+      height: screenSize.width * 0.25,
+
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: getRandomCircularGradient(),
+      ),
+      child: CircleAvatar(
+        backgroundColor: Colors.transparent,
+        child: Center(
+          child: Padding(
+            padding:
+                EdgeInsets.all(screenSize.width * 0.02), // Responsive padding
             child: Text(
-              textAlign: TextAlign.center,
               dishType,
+              textAlign: TextAlign.center,
               style: Styles.textStyle20.copyWith(
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-                shadows: [
-                  Shadow(
-                    color: Colors.black.withOpacity(0.5),
-                    blurRadius: 2,
-                    offset: const Offset(0, 3),
-                  )
-                ],
+                fontSize: screenSize.width * 0.047, // Responsive font size
+                fontWeight: FontWeight.w900,
+                letterSpacing: 1.5,
+                wordSpacing: 1.2,
+
+                color: getRandomTextColor(),
               ),
             ),
           ),

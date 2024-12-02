@@ -1,22 +1,20 @@
-import 'package:flavodish/core/utils/service_locator.dart';
-import 'package:flavodish/features/home/presentation/views/home_view.dart';
-import 'package:flavodish/features/main/presentation/views/main_view.dart';
-import 'package:flavodish/features/meals/data/repo/meals_repo_impl.dart';
-import 'package:flavodish/features/meals/presentation/manager/dish_cuisine_type-meals_cubit/dish_cuisine_type_meals_cubit.dart';
-import 'package:flavodish/features/meals/presentation/manager/dish_type_meals_cubit/dish_type_meals_cubit.dart';
-import 'package:flavodish/features/meals/presentation/manager/meal_type_meals_cubit/meal_type_meals_cubit.dart';
-import 'package:flavodish/features/meals/presentation/views/meals_view.dart';
-import 'package:flavodish/features/profile/presentation/views/profile_view.dart';
-import 'package:flavodish/features/savedRecipes/presentation/views/saved_recipes_view.dart';
-import 'package:flavodish/features/search/data/repo/search_repo_impl.dart';
-import 'package:flavodish/features/search/presentation/manager/searched_meals_cubit/searched_meals_cubit.dart';
-import 'package:flavodish/features/search/presentation/views/search_view.dart';
-import 'package:flavodish/features/splash/presentation/views/splash_view.dart';
+import 'package:flavodish/features/authentication/presentation/views/forget_password_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-abstract class AppRouter {
+import 'package:flavodish/features/authentication/presentation/views/auth_view.dart';
+import 'package:flavodish/features/home/presentation/views/home_view.dart';
+import 'package:flavodish/features/main/presentation/views/main_view.dart';
+import 'package:flavodish/features/meal_detail/presentation/views/favorite_view.dart';
+import 'package:flavodish/features/profile/presentation/views/profile_view.dart';
+import 'package:flavodish/features/search/presentation/views/search_view.dart';
+import 'package:flavodish/features/splash/presentation/views/splash_view.dart';
+
+class AppRouter {
+  final bool isLogin;
+  late final GoRouter router;
+
+  static const String authRoute = '/authView';
   static const String splashRoute = '/';
   static const String mainRoute = '/mainView';
   static const String homeRoute = '/homeView';
@@ -26,97 +24,76 @@ abstract class AppRouter {
   static const String mealDetailsRoute = '/mealDetailsView';
   static const String mealRoute = '/mealView';
 
-  static final router = GoRouter(
-    initialLocation: mainRoute,
-    routes: <RouteBase>[
-      GoRoute(
-        path: splashRoute,
-        builder: (context, state) => const SplashView(),
-      ),
-      GoRoute(
-        path: mainRoute,
-        pageBuilder: (context, state) {
-          return CustomTransitionPage(
+  static const String forgetPasswordRoute = '/forgetPasswordView';
+
+  AppRouter({required this.isLogin}) {
+    router = GoRouter(
+      initialLocation: isLogin ? AppRouter.mainRoute : AppRouter.splashRoute,
+      routes: <RouteBase>[
+        GoRoute(
+          path: AppRouter.authRoute,
+          builder: (context, state) => const AuthView(),
+        ),
+        GoRoute(
+          path: AppRouter.forgetPasswordRoute,
+          builder: (context, state) => const ForgetPasswordView(),
+        ),
+        GoRoute(
+          path: AppRouter.splashRoute,
+          builder: (context, state) => const SplashView(),
+        ),
+        GoRoute(
+          path: AppRouter.mainRoute,
+          pageBuilder: (context, state) {
+            return CustomTransitionPage(
               transitionDuration: const Duration(milliseconds: 1500),
               child: const MainView(),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
-                // Define the zoom transition
-                return ScaleTransition(
-                  scale: animation.drive(
-                    CurveTween(
-                      curve: Curves.easeInOut,
-                    ),
+                return FadeTransition(
+                  opacity: animation.drive(
+                    CurveTween(curve: Curves.easeInOut),
                   ),
-                  child: child,
+                  child: SlideTransition(
+                    position: animation.drive(
+                      Tween<Offset>(
+                        begin: const Offset(0.1, 0),
+                        end: Offset.zero,
+                      ).chain(CurveTween(curve: Curves.easeInOut)),
+                    ),
+                    child: child,
+                  ),
                 );
-              });
-        }, // Main view with bottom navigation
-      ),
-      GoRoute(
-        path: homeRoute,
-        builder: (context, state) => const HomeView(),
-      ),
-      GoRoute(
-        path: searchRoute,
-        builder: (context, state) => BlocProvider(
-          create: (context) => SearchedMealsCubit(
-            getIt.get<SearchRepoImpl>(),
+              },
+            );
+          },
+        ),
+        GoRoute(
+          path: AppRouter.homeRoute,
+          builder: (context, state) => const HomeView(),
+        ),
+        GoRoute(
+          path: AppRouter.searchRoute,
+          builder: (context, state) => const SearchView(),
+        ),
+        GoRoute(
+          path: AppRouter.savedRecipesRoute,
+          builder: (context, state) => const FavoriteRecipeView(),
+        ),
+        GoRoute(
+          path: AppRouter.profileRoute,
+          builder: (context, state) => const ProfileView(),
+        ),
+      ],
+      errorBuilder: (context, state) {
+        return Scaffold(
+          body: Center(
+            child: Text('Error: ${state.error}'),
           ),
-          child: const SearchView(),
-        ),
-      ),
-      GoRoute(
-        path: savedRecipesRoute,
-        builder: (context, state) => const SavedRecipesView(),
-      ),
-      GoRoute(
-        path: profileRoute,
-        builder: (context, state) => const ProfileView(),
-      ),
-      GoRoute(
-        path: searchRoute,
-        builder: (context, state) => MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (context) => MealTypeMealsCubit(
-                getIt.get<MealsRepoImpl>(),
-              ),
-            ),
-            BlocProvider(
-              create: (context) => DishTypeMealsCubit(
-                getIt.get<MealsRepoImpl>(),
-              ),
-            ),
-            BlocProvider(
-              create: (context) => DishCuisineTypeMealsCubit(
-                getIt.get<MealsRepoImpl>(),
-              ),
-            ),
-          ],
-          child: const MealsView(),
-        ),
-      ),
-      // GoRoute(
-      //   path: bookDetailsRoute,
-      //   builder: (context, state) => BlocProvider(
-      //     create: (context) => SimilarBooksCubit(
-      //       getIt.get<HomeRepoImpl>(),
-      //     ),
-      //     child: BookDetailsView(
-      //       bookModel: state.extra as BookModel,
-      //     ),
-      //   ),
-      // ),
-      // GoRoute(
-      //   path: searchRoute,
-      //   builder: (context, state) => BlocProvider(
-      //     create: (context) => SearchedBooksCubit(
-      //       getIt.get<SearchRepoImpl>(),
-      //     ),
-      //     child: const SearchView(),
-      //   ),
-      // ),
-    ],
-  );
+        );
+      },
+    );
+  }
+
+  
 }

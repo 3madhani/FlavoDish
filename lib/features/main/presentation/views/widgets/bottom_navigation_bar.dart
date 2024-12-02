@@ -2,7 +2,7 @@ import 'package:flavodish/features/main/presentation/views/widgets/animated_icon
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-class MyBottomNavigationBar extends StatefulWidget {
+class MyBottomNavigationBar extends StatelessWidget {
   final int currentIndex;
   final Function(int) onItemTapped;
 
@@ -12,11 +12,6 @@ class MyBottomNavigationBar extends StatefulWidget {
     required this.onItemTapped,
   });
 
-  @override
-  State<MyBottomNavigationBar> createState() => _MyBottomNavigationBarState();
-}
-
-class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,16 +26,16 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
       child: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        currentIndex: widget.currentIndex,
-        onTap: widget.onItemTapped, // Handle taps
+        currentIndex: currentIndex,
+        onTap: onItemTapped, // Handle taps
         items: [
           BottomNavigationBarItem(
             icon: AnimatedIconButton(
               icon: HugeIcons.strokeRoundedHome11,
               text: "Home",
-              onTap: () => widget.onItemTapped(0),
+              onTap: () => onItemTapped(0),
               index: 0,
-              isSelected: widget.currentIndex == 0,
+              isSelected: currentIndex == 0,
             ),
             label: "Home",
           ),
@@ -48,9 +43,9 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             icon: AnimatedIconButton(
               icon: HugeIcons.strokeRoundedSearch01,
               text: "Search",
-              onTap: () => widget.onItemTapped(1),
+              onTap: () => onItemTapped(1),
               index: 1,
-              isSelected: widget.currentIndex == 1,
+              isSelected: currentIndex == 1,
             ),
             label: "Search",
           ),
@@ -58,9 +53,9 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             icon: AnimatedIconButton(
               icon: HugeIcons.strokeRoundedFavourite,
               text: "Favorite",
-              onTap: () => widget.onItemTapped(2),
+              onTap: () => onItemTapped(2),
               index: 2,
-              isSelected: widget.currentIndex == 2,
+              isSelected: currentIndex == 2,
             ),
             label: "Favorite",
           ),
@@ -68,9 +63,9 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             icon: AnimatedIconButton(
               icon: HugeIcons.strokeRoundedProfile02,
               text: "Profile",
-              onTap: () => widget.onItemTapped(3),
+              onTap: () => onItemTapped(3),
               index: 3,
-              isSelected: widget.currentIndex == 3,
+              isSelected: currentIndex == 3,
             ),
             label: "Profile",
           ),

@@ -49,14 +49,11 @@ class HomeViewBody extends StatelessWidget {
                 indent: 20,
                 endIndent: MediaQuery.sizeOf(context).width * 0.75,
               ),
-              const SizedBox(
-                height: 5,
-              ),
             ],
           ),
         ),
         const SliverFillRemaining(
-          child: CategorySectionList(),
+          child: DishTypeList(),
         ),
       ],
     );

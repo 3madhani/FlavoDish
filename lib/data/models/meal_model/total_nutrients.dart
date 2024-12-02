@@ -126,9 +126,6 @@ class TotalNutrients {
       chocdf: json['CHOCDF'] == null
           ? null
           : Chocdf.fromJson(json['CHOCDF'] as Map<String, dynamic>),
-      // chocdf: json['CHOCDF'] == null
-      //     ? null
-      //     : Net.fromJson(json['CHOCDF'] as Map<String, dynamic>),
       fibtg: json['FIBTG'] == null
           ? null
           : Fibtg.fromJson(json['FIBTG'] as Map<String, dynamic>),

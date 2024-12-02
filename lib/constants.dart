@@ -13,14 +13,14 @@ const Map mealCatagoriesMap = {
   "Lunch": [
     "assets/images/lunch.png",
   ],
-  "Snacks": [
-    "assets/images/snacks.jpg",
+  "Snack": [
+    "assets/images/snack.jpg",
   ],
   "Dinner": [
     "assets/images/dinner.jpg",
   ],
   "TeaTime": [
-    "assets/images/teatime.jpg",
+    "assets/images/Teatime.jpg",
   ],
 };
 const String caloriesSvg = "assets/svg/apple-svgrepo-com.svg";
@@ -59,6 +59,12 @@ const Map progressCardMap = {
   ],
 };
 
+const Color logInBg = Color(0xFF00C470);
+const Color signUpBg = Color(0xFF000A54);
+
+const double defaultPadding = 16.0;
+const Duration defaultDuration = Duration(milliseconds: 300);
+
 List<String> dishTypeList = [
   "Biscuits and cookies",
   "Bread",
@@ -75,12 +81,11 @@ List<String> dishTypeList = [
   "Side dish",
   "Soup",
   "Starter",
-  "Sweets"
 ];
 
 List<String> cuisineTypeList = [
   "American",
-	"Asian",
+  "Asian",
   "British",
   "Caribbean",
   "Central Europe",

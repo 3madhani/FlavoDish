@@ -58,56 +58,66 @@ class Recipe {
   });
 
   factory Recipe.fromJson(Map<String, dynamic> json) => Recipe(
-  uri: json['uri'] as String?,
-  label: json['label'] as String?,
-  image: json['image'] as String?,
-  images: json['images'] == null
-      ? null
-      : Images.fromJson(json['images'] as Map<String, dynamic>),
-  source: json['source'] as String?,
-  url: json['url'] as String?,
-  shareAs: json['shareAs'] as String?,
-  yield: (json['yield'] is num) ? (json['yield'] as num).toInt() : null,
-  dietLabels: (json['dietLabels'] as List<dynamic>?)
-      ?.map((e) => e as String) // Explicitly cast to String
-      .toList(),
-  healthLabels: (json['healthLabels'] as List<dynamic>?)
-      ?.map((e) => e as String) // Explicitly cast to String
-      .toList(),
-  cautions: (json['cautions'] as List<dynamic>?)
-      ?.map((e) => e as String) // Explicitly cast to String
-      .toList(),
-  ingredientLines: (json['ingredientLines'] as List<dynamic>?)
-      ?.map((e) => e as String) // Explicitly cast to String
-      .toList(),
-  ingredients: (json['ingredients'] as List<dynamic>?)
-      ?.map((e) => Ingredient.fromJson(e as Map<String, dynamic>))
-      .toList(),
-  calories: (json['calories'] as num?)?.toDouble(),
-  totalCo2Emissions: (json['totalCO2Emissions'] as num?)?.toDouble(),
-  co2EmissionsClass: json['co2EmissionsClass'] as String?,
-  totalWeight: (json['totalWeight'] as num?)?.toDouble(),
-  totalTime: (json['totalTime'] is num) ? (json['totalTime'] as num).toInt() : null,
-  cuisineType: (json['cuisineType'] as List<dynamic>?)
-      ?.map((e) => e as String) // Explicitly cast to String
-      .toList(),
-  mealType: (json['mealType'] as List<dynamic>?)
-      ?.map((e) => e as String) // Explicitly cast to String
-      .toList(),
-  dishType: (json['dishType'] as List<dynamic>?)
-      ?.map((e) => e as String) // Explicitly cast to String
-      .toList(),
-  totalNutrients: json['totalNutrients'] == null
-      ? null
-      : TotalNutrients.fromJson(
-          json['totalNutrients'] as Map<String, dynamic>),
-  totalDaily: json['totalDaily'] == null
-      ? null
-      : TotalDaily.fromJson(json['totalDaily'] as Map<String, dynamic>),
-  digest: (json['digest'] as List<dynamic>?)
-      ?.map((e) => Digest.fromJson(e as Map<String, dynamic>))
-      .toList(),
-);
+        uri: json['uri'] as String?,
+        label: json['label'] as String?,
+        image: json['image'] as String?,
+        images: json['images'] == null
+            ? null
+            : Images.fromJson(json['images'] as Map<String, dynamic>),
+        source: json['source'] as String?,
+        url: json['url'] as String?,
+        shareAs: json['shareAs'] as String?,
+        yield: json['yield'] is String
+            ? int.tryParse(json['yield'])
+            : (json['yield'] as num?)?.toInt(),
+        dietLabels: (json['dietLabels'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList(),
+        healthLabels: (json['healthLabels'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList(),
+        cautions: (json['cautions'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList(),
+        ingredientLines: (json['ingredientLines'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList(),
+        ingredients: (json['ingredients'] as List<dynamic>?)
+            ?.map((e) => Ingredient.fromJson(e as Map<String, dynamic>))
+            .toList(),
+        calories: json['calories'] is String
+            ? double.tryParse(json['calories'])
+            : (json['calories'] as num?)?.toDouble(),
+        totalCo2Emissions: json['totalCO2Emissions'] is String
+            ? double.tryParse(json['totalCO2Emissions'])
+            : (json['totalCO2Emissions'] as num?)?.toDouble(),
+        co2EmissionsClass: json['co2EmissionsClass'] as String?,
+        totalWeight: json['totalWeight'] is String
+            ? double.tryParse(json['totalWeight'])
+            : (json['totalWeight'] as num?)?.toDouble(),
+        totalTime: json['totalTime'] is String
+            ? int.tryParse(json['totalTime'])
+            : (json['totalTime'] as num?)?.toInt(),
+        cuisineType: (json['cuisineType'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList(),
+        mealType: (json['mealType'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList(),
+        dishType: (json['dishType'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList(),
+        totalNutrients: json['totalNutrients'] == null
+            ? null
+            : TotalNutrients.fromJson(
+                json['totalNutrients'] as Map<String, dynamic>),
+        totalDaily: json['totalDaily'] == null
+            ? null
+            : TotalDaily.fromJson(json['totalDaily'] as Map<String, dynamic>),
+        digest: (json['digest'] as List<dynamic>?)
+            ?.map((e) => Digest.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      );
 
   Map<String, dynamic> toJson() => {
         'uri': uri,
