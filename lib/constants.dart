@@ -20,7 +20,7 @@ const Map mealCategoriesMap = {
     "assets/images/dinner.jpg",
   ],
   "TeaTime": [
-    "assets/images/Teatime.jpg",
+    "assets/images/teatime.jpg",
   ],
 };
 const String caloriesSvg = "assets/svg/apple-svgrepo-com.svg";

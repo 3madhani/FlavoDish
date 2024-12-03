@@ -15,7 +15,6 @@ import 'features/profile/presentation/manager/fetch_user_data_cubit/fetch_user_d
 import 'firebase_options.dart';
 
 bool isLogin = false; // Change this to a non-nullable type
-
 void main() async {
   // Ensure Flutter is initialized
   WidgetsFlutterBinding.ensureInitialized();
