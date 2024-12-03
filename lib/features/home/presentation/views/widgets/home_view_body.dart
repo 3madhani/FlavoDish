@@ -1,7 +1,7 @@
 import 'package:flavodish/constants.dart';
 import 'package:flutter/material.dart';
 import 'custom_app_bar.dart';
-import 'list_view_meal_catagories.dart';
+import 'list_view_meal_categories.dart';
 import 'dish_type_list.dart';
 import 'category_section.dart';
 
@@ -36,7 +36,7 @@ class HomeViewBody extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const ListViewMealCatagories(),
+              const ListViewMealCategories(),
               const SizedBox(
                 height: 25,
               ),

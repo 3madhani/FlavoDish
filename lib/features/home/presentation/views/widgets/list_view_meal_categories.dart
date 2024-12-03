@@ -4,8 +4,8 @@ import 'package:flavodish/features/meals/presentation/views/meals_view.dart';
 import 'package:flavodish/core/utils/widgets/animated_open_container.dart';
 import 'package:flutter/material.dart';
 
-class ListViewMealCatagories extends StatelessWidget {
-  const ListViewMealCatagories({
+class ListViewMealCategories extends StatelessWidget {
+  const ListViewMealCategories({
     super.key,
   });
 
@@ -20,12 +20,12 @@ class ListViewMealCatagories extends StatelessWidget {
         child: ListView.builder(
             clipBehavior: Clip.none,
             physics: const BouncingScrollPhysics(),
-            itemCount: mealCatagoriesMap.length,
+            itemCount: mealCategoriesMap.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               // Get the keys and values from the map
-              String category = mealCatagoriesMap.keys.elementAt(index);
-              String imagePath = mealCatagoriesMap[category][0];
+              String category = mealCategoriesMap.keys.elementAt(index);
+              String imagePath = mealCategoriesMap[category][0];
 
               // Return a FoodCard for each map entry
               return Padding(

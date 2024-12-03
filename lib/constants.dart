@@ -6,7 +6,7 @@ const kSofiaPro = "Sofia Pro";
 const kPrimaryTextColor = Color(0xff1985ff);
 const kSecondaryTextColor = Color(0xffb1b8c2);
 const double kPadding = 20;
-const Map mealCatagoriesMap = {
+const Map mealCategoriesMap = {
   "Breakfast": [
     "assets/images/Breakfast.jpg",
   ],
